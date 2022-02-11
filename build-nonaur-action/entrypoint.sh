@@ -24,6 +24,8 @@ echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 chmod -R a+rw .
 
 BASEDIR="$PWD"
+DIR="$( cd "$( dirname "$0" )" && pwd )"
+echo "DIR: $DIR"
 echo "BASEDIR: $BASEDIR"
 cd "${INPUT_PKGDIR:-.}"
 
@@ -34,7 +36,7 @@ fi
 
 # 更新Hash值，并进行签名
 runuser builder -c "updpkgsums"
-runuser builder -c "${BASEDIR}/fetch-validpgpkeys.sh"
+runuser builder -c "$DIR/fetch-validpgpkeys.sh"
 
 function recursive_build () {
 	for d in *; do
