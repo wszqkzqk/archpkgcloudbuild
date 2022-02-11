@@ -2,6 +2,7 @@
 set -euo pipefail
 
 FILE="$(basename "$0")"
+DIR="$( cd "$( dirname "$0" )" && pwd )"
 
 # Enable the multilib repository
 cat << EOM >> /etc/pacman.conf
@@ -34,7 +35,7 @@ fi
 
 # 更新Hash值，并进行签名
 runuser builder -c "updpkgsums"
-runuser builder -c "./fetch-validpgpkeys.sh"
+runuser builder -c "${DIR}/fetch-validpgpkeys.sh"
 
 function recursive_build () {
 	for d in *; do
