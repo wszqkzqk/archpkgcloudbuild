@@ -36,8 +36,6 @@ fi
 
 # 更新Hash值，并进行签名
 runuser builder -c "updpkgsums"
-chmod 755 "$DIR/fetch-validpgpkeys.sh"
-runuser builder -c "$DIR/fetch-validpgpkeys.sh"
 
 function recursive_build () {
 	for d in *; do
@@ -51,7 +49,7 @@ function recursive_build () {
 		<(sed -n -e 's/^[[:space:]]*\(make\)\?depends\(_x86_64\)\? = \([[:alnum:][:punct:]]*\)[[:space:]]*$/\3/p' .SRCINFO)
 	sudo -H -u builder yay --sync --noconfirm --needed --builddir="$BASEDIR" "${OTHERPKGDEPS[@]}"
 
-	sudo -H -u builder makepkg --install --noconfirm
+	sudo -H -u builder makepkg --skippgpcheck --install --noconfirm
 	[ -d "$BASEDIR/local/" ] || mkdir "$BASEDIR/local/"
 	packages=( "*.tar.zst" )
 	echo "build: $packages"
