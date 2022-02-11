@@ -27,9 +27,6 @@ BASEDIR="$PWD"
 echo "BASEDIR: $BASEDIR"
 cd "${INPUT_PKGDIR:-.}"
 
-# 更新Hash值
-sudo -u builder updpkgsums
-
 # Just generate .SRCINFO
 if ! [ -f .SRCINFO ]; then
 	sudo -u builder makepkg --printsrcinfo > .SRCINFO
@@ -47,6 +44,9 @@ function recursive_build () {
 		<(sed -n -e 's/^[[:space:]]*\(make\)\?depends\(_x86_64\)\? = \([[:alnum:][:punct:]]*\)[[:space:]]*$/\3/p' .SRCINFO)
 	sudo -H -u builder yay --sync --noconfirm --needed --builddir="$BASEDIR" "${OTHERPKGDEPS[@]}"
 	
+	# 更新Hash值
+    sudo -u builder updpkgsums
+
 	sudo -H -u builder makepkg --install --noconfirm
 	[ -d "$BASEDIR/local/" ] || mkdir "$BASEDIR/local/"
 	packages=( "*.tar.zst" )
