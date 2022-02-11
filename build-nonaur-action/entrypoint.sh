@@ -9,7 +9,7 @@ cat << EOM >> /etc/pacman.conf
 Include = /etc/pacman.d/mirrorlist
 EOM
 
-pacman -Syu --noconfirm --needed base-devel
+pacman -Syu --noconfirm --needed base-devel pacman-contrib
 
 # Makepkg does not allow running as root
 # Create a new user `builder`
@@ -33,7 +33,6 @@ if ! [ -f .SRCINFO ]; then
 fi
 
 # 更新Hash值
-yes|pacman -S pacman-contrib
 runuser builder -c "updpkgsums"
 
 function recursive_build () {
