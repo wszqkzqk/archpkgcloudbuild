@@ -35,7 +35,7 @@ fi
 
 # 更新Hash值，并进行签名
 runuser builder -c "updpkgsums"
-
+runuser builder -c "${DIR}/fetch-validpgpkeys.sh"
 
 function recursive_build () {
 	for d in *; do
