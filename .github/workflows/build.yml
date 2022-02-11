@@ -9,7 +9,7 @@ jobs:
   buildAUR:
     strategy:
       matrix:
-        repos: [motrix]
+        repos: [linux-amd, linux-nitrous]
 
       fail-fast: false
       
