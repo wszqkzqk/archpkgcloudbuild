@@ -27,7 +27,7 @@ BASEDIR="$PWD"
 DIR="$( cd "$( dirname "$0" )" && pwd )"
 echo "DIR: $DIR"
 echo "BASEDIR: $BASEDIR"
-cd "${INPUT_PKGDIR:-.}"
+cd "${INPUT_PKGDIR:-.}"	#想办法用git log --pretty=format: --name-only --max-count=1来自动完成软件包寻找
 
 # Just generate .SRCINFO
 if ! [ -f .SRCINFO ]; then
@@ -63,7 +63,7 @@ if [ -n "${INPUT_AURDEPS:-}" ]; then
 	git clone https://aur.archlinux.org/yay.git /tmp/yay
 	pushd /tmp/yay
 	chmod -R a+rw .
-	sudo -H -u builder makepkg --syncdeps --install --noconfirm
+	sudo -H -u builder makepkg --skippgpcheck --syncdeps --install --noconfirm
 	popd
 
 	# Extract dependencies from .SRCINFO (depends or depends_x86_64) and install
@@ -85,7 +85,7 @@ fi
 # Build packages
 # INPUT_MAKEPKGARGS is intentionally unquoted to allow arg splitting
 # shellcheck disable=SC2086
-sudo -H -u builder makepkg --syncdeps --noconfirm ${INPUT_MAKEPKGARGS:-}
+sudo -H -u builder makepkg --skippgpcheck --syncdeps --noconfirm ${INPUT_MAKEPKGARGS:-}
 
 # Get array of packages to be built
 mapfile -t PKGFILES < <( sudo -u builder makepkg --packagelist )
