@@ -2,7 +2,7 @@
 set -euo pipefail
 
 FILE="$(basename "$0")"
-DIR="$( cd "$( dirname "$0" )" && pwd )"
+DIR="$(dirname "$0")"
 
 # Enable the multilib repository
 cat << EOM >> /etc/pacman.conf
