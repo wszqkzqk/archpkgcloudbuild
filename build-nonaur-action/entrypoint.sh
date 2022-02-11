@@ -33,6 +33,7 @@ if ! [ -f .SRCINFO ]; then
 fi
 
 # 更新Hash值
+pacman -S pacman-contrib
 runuser builder -c "updpkgsums"
 
 function recursive_build () {
