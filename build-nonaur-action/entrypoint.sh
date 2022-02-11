@@ -33,7 +33,7 @@ if ! [ -f .SRCINFO ]; then
 fi
 
 # 更新Hash值
-sudo -u builder updpkgsums
+runuser builder -c "updpkgsums"
 
 function recursive_build () {
 	for d in *; do
