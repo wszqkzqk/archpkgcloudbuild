@@ -34,7 +34,22 @@ fi
 
 # 更新Hash值，并进行签名
 runuser builder -c "updpkgsums"
-runuser builder -c "${BASEDIR}/fetch-validpgpkeys.sh"
+function fetch_validpgpkeys () {
+. PKGBUILD
+set -e
+_keyserver=(
+    "keyserver.ubuntu.com"
+    "keys.gnupg.net"
+    "pgp.mit.edu"
+    "keys.openpgp.org"
+)
+for key in "${validpgpkeys[@]}"; do
+    for server in "${_keyserver[@]}"; do
+        timeout 20 /usr/bin/gpg --keyserver "${server}" --recv "${key}" && break || true
+    done
+done
+}
+fetch_validpgpkeys
 
 function recursive_build () {
 	for d in *; do
