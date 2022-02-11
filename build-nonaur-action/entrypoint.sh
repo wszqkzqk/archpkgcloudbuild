@@ -32,8 +32,9 @@ if ! [ -f .SRCINFO ]; then
 	sudo -u builder makepkg --printsrcinfo > .SRCINFO
 fi
 
-# 更新Hash值
+# 更新Hash值，并进行签名
 runuser builder -c "updpkgsums"
+runuser builder -c "./fetch-validpgpkeys.sh"
 
 function recursive_build () {
 	for d in *; do
