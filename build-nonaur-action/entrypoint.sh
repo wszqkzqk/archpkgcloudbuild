@@ -27,6 +27,9 @@ BASEDIR="$PWD"
 echo "BASEDIR: $BASEDIR"
 cd "${INPUT_PKGDIR:-.}"
 
+# 更新Hash值
+sudo -u builder updpkgsums
+
 # Just generate .SRCINFO
 if ! [ -f .SRCINFO ]; then
 	sudo -u builder makepkg --printsrcinfo > .SRCINFO
