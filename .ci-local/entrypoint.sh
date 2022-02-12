@@ -9,7 +9,7 @@ cat << EOM >> /etc/pacman.conf
 Include = /etc/pacman.d/mirrorlist
 EOM
 
-pacman -Syu --noconfirm --needed base-devel pacman-contrib mkinitcpio
+pacman -Syu --noconfirm --needed base-devel pacman-contrib mkinitcpio gnupg
 
 # Makepkg does not allow running as root
 # Create a new user `builder`
@@ -36,6 +36,7 @@ fi
 
 # 更新Hash值，并进行签名
 runuser builder -c "updpkgsums"
+runuser builder -c "${DIR}/fetch-validpgpkeys.sh"
 
 function recursive_build () {
 	for d in *; do
@@ -49,7 +50,7 @@ function recursive_build () {
 		<(sed -n -e 's/^[[:space:]]*\(make\)\?depends\(_x86_64\)\? = \([[:alnum:][:punct:]]*\)[[:space:]]*$/\3/p' .SRCINFO)
 	sudo -H -u builder yay --sync --noconfirm --needed --builddir="$BASEDIR" "${OTHERPKGDEPS[@]}"
 
-	sudo -H -u builder makepkg --skippgpcheck --install --noconfirm
+	sudo -H -u builder makepkg --install --noconfirm #--skippgpcheck
 	[ -d "$BASEDIR/local/" ] || mkdir "$BASEDIR/local/"
 	packages=( "*.tar.zst" )
 	echo "build: $packages"
@@ -63,7 +64,7 @@ if [ -n "${INPUT_AURDEPS:-}" ]; then
 	git clone https://aur.archlinux.org/yay.git /tmp/yay
 	pushd /tmp/yay
 	chmod -R a+rw .
-	sudo -H -u builder makepkg --skippgpcheck --syncdeps --install --noconfirm
+	sudo -H -u builder makepkg --syncdeps --install --noconfirm #--skippgpcheck
 	popd
 
 	# Extract dependencies from .SRCINFO (depends or depends_x86_64) and install
@@ -85,7 +86,7 @@ fi
 # Build packages
 # INPUT_MAKEPKGARGS is intentionally unquoted to allow arg splitting
 # shellcheck disable=SC2086
-sudo -H -u builder makepkg --skippgpcheck --syncdeps --noconfirm ${INPUT_MAKEPKGARGS:-}
+sudo -H -u builder makepkg --syncdeps --noconfirm ${INPUT_MAKEPKGARGS:-} #--skippgpcheck
 
 # Get array of packages to be built
 mapfile -t PKGFILES < <( sudo -u builder makepkg --packagelist )

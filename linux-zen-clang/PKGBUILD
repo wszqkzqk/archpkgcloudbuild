@@ -3,7 +3,7 @@
 pkgbase=linux-zen-clang
 pkgver=5.16.8.zen1
 pkgrel=2
-pkgdesc='Linux ZEN'
+pkgdesc='Linux ZEN (Built by Clang)'
 _srctag=v${pkgver%.*}-${pkgver##*.}
 url="https://github.com/zen-kernel/zen-kernel/commits/$_srctag"
 arch=(x86_64)
@@ -20,12 +20,12 @@ source=(
   "$_srcname::git+https://github.com/zen-kernel/zen-kernel?signed#tag=$_srctag"
   config         # the main kernel config file
 )
-#validpgpkeys=(
-#  'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
-#  '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
-#  'A2FF3A36AAA56654109064AB19802F8B0D70FC30'  # Jan Alexander Steffens (heftig)
-#  'C5ADB4F3FEBBCE27A3E54D7D9AE4078033F8024D'  # Steven Barrett <steven@liquorix.net>
-#)
+validpgpkeys=(
+  'ABAF11C65A2970B130ABE3C479BE3E4300411886'  # Linus Torvalds
+  '647F28654894E3BD457199BE38DBBDC86092693E'  # Greg Kroah-Hartman
+  'A2FF3A36AAA56654109064AB19802F8B0D70FC30'  # Jan Alexander Steffens (heftig)
+  'C5ADB4F3FEBBCE27A3E54D7D9AE4078033F8024D'  # Steven Barrett <steven@liquorix.net>
+)
 sha256sums=('SKIP'
             'c2a9b42dbc3fa917726ac2a636c0af5f01829b3231fa8779ac04fb678cc4e3c3')
 
@@ -52,17 +52,17 @@ prepare() {
 
   echo "Setting config..."
   cp ../config .config
-  make olddefconfig
+  make -j 20 olddefconfig
   diff -u ../config .config || :
 
-  make -s kernelrelease > version
+  make 20 -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
 }
 
 build() {
   cd $_srcname
-  make all
-  make htmldocs
+  make -j 20 all
+  make -j 20 htmldocs
 }
 
 _package() {
@@ -86,7 +86,7 @@ _package() {
   echo "$pkgbase" | install -Dm644 /dev/stdin "$modulesdir/pkgbase"
 
   echo "Installing modules..."
-  make INSTALL_MOD_PATH="$pkgdir/usr" INSTALL_MOD_STRIP=1 modules_install
+  make -j 20 INSTALL_MOD_PATH="$pkgdir/usr" INSTALL_MOD_STRIP=1 modules_install
 
   # remove build and source links
   rm "$modulesdir"/{source,build}
