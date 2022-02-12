@@ -14,7 +14,7 @@ jobs:
   buildAUR:
     strategy:
       matrix:
-        repos: [linux-amd, linux-nitrous, linux-enable-ir-emitter, netease-cloud-music]
+        repos: [linux-amd, linux-nitrous, linux-enable-ir-emitter, netease-cloud-music, motrix-bin, lx-music-desktop-bin]
 
       fail-fast: false
       
