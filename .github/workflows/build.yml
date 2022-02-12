@@ -1,9 +1,14 @@
 name: BUILD
 
+concurrency: 
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 on:
   push:
-  schedule:
-    - cron:  '1 */8 * * *'
+  pull_request:
+#  schedule:
+#    - cron:  '1 */8 * * *'
 
 jobs:
   buildAUR:
@@ -31,6 +36,13 @@ jobs:
       with:
         allowUpdates: true
         tag: "packages"
+        artifacts: "./*/*.zst"
+        token: ${{ secrets.GITHUB_TOKEN }}
+
+    - uses: ncipollo/release-action@v1
+      with:
+        allowUpdates: true
+        tag: "AUR"
         artifacts: "./*/*.zst"
         token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -62,5 +74,12 @@ jobs:
         with:
           allowUpdates: true
           tag: "packages"
+          artifacts: ${{ steps.makepkg.outputs.pkgfile0 }}
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          tag: "NonAUR"
           artifacts: ${{ steps.makepkg.outputs.pkgfile0 }}
           token: ${{ secrets.GITHUB_TOKEN }}
