@@ -9,7 +9,7 @@ cat << EOM >> /etc/pacman.conf
 Include = /etc/pacman.d/mirrorlist
 EOM
 
-pacman -Syu --noconfirm --needed base-devel pacman-contrib mkinitcpio gnupg
+pacman -Syu --noconfirm --needed base-devel pacman-contrib mkinitcpio
 
 # Makepkg does not allow running as root
 # Create a new user `builder`
