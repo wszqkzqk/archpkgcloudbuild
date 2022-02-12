@@ -13,6 +13,15 @@ chmod -R a+rw .
 
 pacman-key --init
 pacman -Sy --noconfirm #&& pacman -S --noconfirm archlinuxcn-keyring
-pacman -S --noconfirm yay
+#pacman -S --noconfirm yay
+
+# Install yay
+pacman -S --noconfirm --needed git
+git clone https://aur.archlinux.org/yay.git /tmp/yay
+pushd /tmp/yay
+chmod -R a+rw .
+sudo -H -u builder makepkg --skippgpcheck --syncdeps --install --noconfirm
+popd
+
 
 sudo --set-home -u builder yay -S --noconfirm --builddir=./ "$pkgname"
