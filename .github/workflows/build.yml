@@ -9,7 +9,7 @@ jobs:
   buildAUR:
     strategy:
       matrix:
-        repos: []
+        repos: [howdy, python-dlib, pam-python, python-face_recognition, python-face_recognition_models]
 
       fail-fast: false
       
