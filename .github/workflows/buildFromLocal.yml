@@ -34,17 +34,10 @@ jobs:
         with:
           path: ./*/*.pkg.tar.zst
           name: ${{ matrix.PKGBUILDs }}
-      
-      - uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true
-          tag: "packages"
-          artifacts: ${{ steps.makepkg.outputs.pkgfile0 }}
-          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          tag: "NonAUR"
+          tag: "Built-from-Local-PKGBUILDs"
           artifacts: ${{ steps.makepkg.outputs.pkgfile0 }}
           token: ${{ secrets.GITHUB_TOKEN }}

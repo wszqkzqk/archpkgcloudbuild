@@ -21,27 +21,20 @@ jobs:
     runs-on: ubuntu-latest
     
     steps:
-    - uses: actions/checkout@v2
-    
-    - uses: ./.ci-aur
-      with:
-        repo-name: ${{ matrix.repos }}
-    
-    - uses: actions/upload-artifact@v2
-      with:
-        path: ./*/*.pkg.tar.zst
-        name: ${{ matrix.repos }}
-        
-    - uses: ncipollo/release-action@v1
-      with:
-        allowUpdates: true
-        tag: "packages"
-        artifacts: "./*/*.zst"
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v2
+      
+      - uses: ./.ci-aur
+        with:
+          repo-name: ${{ matrix.repos }}
+      
+      - uses: actions/upload-artifact@v2
+        with:
+          path: ./*/*.pkg.tar.zst
+          name: ${{ matrix.repos }}
 
-    - uses: ncipollo/release-action@v1
-      with:
-        allowUpdates: true
-        tag: "AUR"
-        artifacts: "./*/*.zst"
-        token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          tag: "Built-from-AUR"
+          artifacts: "./*/*.zst"
+          token: ${{ secrets.GITHUB_TOKEN }}
