@@ -1,18 +1,20 @@
-name: buildFromAUR
+name: buildFromAURMonthly
 
 concurrency: 
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 on:
-  push:
-  pull_request:
+#  push:
+#  pull_request:
+  schedule:
+    - cron:  '0 4 1 * *'
 
 jobs:
   buildAUR:
     strategy:
       matrix:
-        repos: []
+        repos: [linux-amd, linux-nitrous]
 
       fail-fast: false
       

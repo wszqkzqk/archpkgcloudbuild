@@ -1,18 +1,20 @@
-name: buildFromAUR
+name: buildFromAURWeekly
 
 concurrency: 
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
 on:
-  push:
-  pull_request:
+#  push:
+#  pull_request:
+  schedule:
+    - cron:  '0 4 * * 1'
 
 jobs:
   buildAUR:
     strategy:
       matrix:
-        repos: []
+        repos: [howdy, python-dlib, pam-python, python-face_recognition, python-face_recognition_models, motrix, lx-music]
 
       fail-fast: false
       
