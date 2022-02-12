@@ -55,7 +55,7 @@ prepare() {
   make -j 20 olddefconfig
   diff -u ../config .config || :
 
-  make 20 -s kernelrelease > version
+  make -j 20 -s kernelrelease > version
   echo "Prepared $pkgbase version $(<version)"
 }
 
