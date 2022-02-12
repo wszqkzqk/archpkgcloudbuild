@@ -9,7 +9,7 @@ jobs:
   buildAUR:
     strategy:
       matrix:
-        repos: [linux-amd, linux-nitrous]
+        repos: []
 
       fail-fast: false
       
@@ -37,7 +37,7 @@ jobs:
   buildNonAUR:
     strategy:
       matrix:
-        PKGBUILDs: [linux-zen-clang]
+        PKGBUILDs: [linux-zen-clang, linux-zen]
 
       fail-fast: false
       
