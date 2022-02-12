@@ -1,4 +1,4 @@
-name: BUILD
+name: buildFromLocal
 
 concurrency: 
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -11,42 +11,7 @@ on:
 #    - cron:  '1 */8 * * *'
 
 jobs:
-  buildAUR:
-    strategy:
-      matrix:
-        repos: [howdy, python-dlib, pam-python, python-face_recognition, python-face_recognition_models]
-
-      fail-fast: false
-      
-    runs-on: ubuntu-latest
-    
-    steps:
-    - uses: actions/checkout@v2
-    
-    - uses: ./build-aur-action
-      with:
-        repo-name: ${{ matrix.repos }}
-    
-    - uses: actions/upload-artifact@v2
-      with:
-        path: ./*/*.pkg.tar.zst
-        name: ${{ matrix.repos }}
-        
-    - uses: ncipollo/release-action@v1
-      with:
-        allowUpdates: true
-        tag: "packages"
-        artifacts: "./*/*.zst"
-        token: ${{ secrets.GITHUB_TOKEN }}
-
-    - uses: ncipollo/release-action@v1
-      with:
-        allowUpdates: true
-        tag: "AUR"
-        artifacts: "./*/*.zst"
-        token: ${{ secrets.GITHUB_TOKEN }}
-
-  buildNonAUR:
+  buildLocal:
     strategy:
       matrix:
         PKGBUILDs: [linux-zen-clang, linux-zen]
@@ -58,9 +23,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Build Non-AUR packages
+      - name: Build packages from local PKGBUILDs
         id: makepkg
-        uses: ./build-nonaur-action
+        uses: ./.ci-local
         with:
           pkgdir: ${{ matrix.PKGBUILDs }}
           aurDeps: true
