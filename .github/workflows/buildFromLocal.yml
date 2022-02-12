@@ -38,6 +38,6 @@ jobs:
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true
-          tag: "Built-from-Local-PKGBUILDs"
+          tag: "Built-from-local-PKGBUILDs"
           artifacts: ${{ steps.makepkg.outputs.pkgfile0 }}
           token: ${{ secrets.GITHUB_TOKEN }}
