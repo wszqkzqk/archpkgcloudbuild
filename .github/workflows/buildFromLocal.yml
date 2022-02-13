@@ -14,7 +14,7 @@ jobs:
   buildLocal:
     strategy:
       matrix:
-        PKGBUILDs: [wps-office-cn]
+        PKGBUILDs: [linux-amd-clang, linux-zen, linux-zen-clang]
 
       fail-fast: false
       
@@ -29,7 +29,8 @@ jobs:
         with:
           pkgdir: ${{ matrix.PKGBUILDs }}
           aurDeps: true
-          namcapDisable: true
+          # 在打包wps-office-cn等安装包内含有大量中文路径的软件时应当打开这个选项
+          # namcapDisable: true
 
           
       - uses: actions/upload-artifact@v2
