@@ -29,7 +29,7 @@ jobs:
         with:
           pkgdir: ${{ matrix.PKGBUILDs }}
           aurDeps: true
-          namcapExcludeRules: [wps-office-cn]
+          namcapExcludeRules: wps-office-cn
 
           
       - uses: actions/upload-artifact@v2
