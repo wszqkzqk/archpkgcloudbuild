@@ -36,5 +36,5 @@ jobs:
         with:
           allowUpdates: true
           tag: "Built-from-AUR"
-          artifacts: "./*/*.zst"
+          artifacts: "./*/*pkg.tar*"
           token: ${{ secrets.GITHUB_TOKEN }}

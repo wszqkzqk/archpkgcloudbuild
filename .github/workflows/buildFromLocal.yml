@@ -41,5 +41,5 @@ jobs:
         with:
           allowUpdates: true
           tag: "Built-from-local-PKGBUILDs"
-          path: ./*/*.pkg.tar*
+          artifacts: "./*/*.pkg.tar*"
           token: ${{ secrets.GITHUB_TOKEN }}
