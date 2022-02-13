@@ -12,7 +12,7 @@ jobs:
   buildAUR:
     strategy:
       matrix:
-        repos: [hplip-plugin, virtualbox-ext-oracle]
+        repos: [geekbench]
 
       fail-fast: false
       
