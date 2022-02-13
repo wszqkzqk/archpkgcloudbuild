@@ -28,6 +28,7 @@ DIR="$( cd "$( dirname "$0" )" && pwd )"
 echo "DIR: $DIR"
 echo "BASEDIR: $BASEDIR"
 cd "${INPUT_PKGDIR:-.}"	#想办法用git log --pretty=format: --name-only --max-count=1来自动完成软件包寻找
+echo "INPUTDIE: ${INPUT_PKGDIR:-.}"
 
 # Just generate .SRCINFO
 if ! [ -f .SRCINFO ]; then
