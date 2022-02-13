@@ -14,7 +14,7 @@ jobs:
   buildLocal:
     strategy:
       matrix:
-        PKGBUILDs: [linux-zen, linux-zen-clang]
+        PKGBUILDs: [wps-office-cn]
 
       fail-fast: false
       
