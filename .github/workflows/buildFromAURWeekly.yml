@@ -8,7 +8,7 @@ on:
 #  push:
 #  pull_request:
   schedule:
-    - cron:  '0 4 * * 5'
+    - cron:  '0 4 * * 1'
 
 jobs:
   buildAUR:
