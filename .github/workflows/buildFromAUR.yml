@@ -12,7 +12,7 @@ jobs:
   buildAUR:
     strategy:
       matrix:
-        repos: [geekbench]
+        repos: [fizsh-git]
 
       fail-fast: false
       
