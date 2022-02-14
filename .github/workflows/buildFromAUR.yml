@@ -12,7 +12,7 @@ jobs:
   buildAUR:
     strategy:
       matrix:
-        repos: [fizsh-git]
+        repos: [fizsh-git, zsh-fish]
 
       fail-fast: false
       
