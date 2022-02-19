@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         repos: [mingw-w64-wine, 
-                mingw-w64-aom, ingw-w64-aom, mingw-w64-crt, mingw-w64-bzip2, mingw-w64-fontconfig, mingw-w64-fribidi, mingw-w64-gmp, mingw-w64-gnutls, mingw-w64-gsm, mingw-w64-lame, mingw-w64-libass, mingw-w64-libbluray, mingw-w64-dav1d, mingw-w64-libmodplug, mingw-w64-libsoxr, mingw-w64-libtheora, mingw-w64-vid.stab, mingw-w64-libwebp, mingw-w64-libxml2, mingw-w64-libvorbis, mingw-w64-libvpx, mingw-w64-opencore-amr, mingw-w64-openjpeg2, mingw-w64-opus, mingw-w64-rav1e, mingw-w64-librsvg, mingw-w64-libssh, mingw-w64-sdl2, mingw-w64-speex, mingw-w64-srt, mingw-w64-x264, mingw-w64-xvidcore, mingw-w64-zimg, mingw-w64-zlib, mingw-w64-x265, 
+                mingw-w64-aom, ingw-w64-aom, mingw-w64-crt, mingw-w64-bzip2, mingw-w64-fontconfig, mingw-w64-fribidi, mingw-w64-gmp, mingw-w64-gnutls, mingw-w64-gsm, mingw-w64-lame, mingw-w64-libass, mingw-w64-libbluray, mingw-w64-dav1d, mingw-w64-libmodplug, mingw-w64-libsoxr, mingw-w64-libtheora, mingw-w64-vid.stab, mingw-w64-libwebp, mingw-w64-libxml2, mingw-w64-libvorbis, mingw-w64-libvpx, mingw-w64-opencore-amr, mingw-w64-openjpeg2, mingw-w64-opus, mingw-w64-rav1e, mingw-w64-librsvg, mingw-w64-libssh, mingw-w64-sdl2, mingw-w64-speex, mingw-w64-srt, mingw-w64-x264, mingw-w64-xvidcore, mingw-w64-zimg, mingw-w64-zlib, mingw-w64-x265, mingw-w64-ffmpeg
                 mingw-w64-pkg-config, mingw-w64-environment, mingw-w64-configure, mingw-w64-bzip2, mingw-w64-zlib, mingw-w64-libbachtrace-git, mingw-w64-cppunit, mingw-w64-cmake, mingw-w64-zstd, mingw-w64-boost, mingw-w64-taglib]
 
       fail-fast: false
