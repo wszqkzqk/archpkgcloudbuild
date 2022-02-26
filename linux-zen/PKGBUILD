@@ -51,7 +51,7 @@ prepare() {
 
   echo "Setting config..."
   cp ../config .config
-  make -j 20 olddefconfig
+  make -j olddefconfig
   diff -u ../config .config || :
 
   make -s kernelrelease > version
@@ -60,8 +60,8 @@ prepare() {
 
 build() {
   cd $_srcname
-  make -j 20 all
-  make -j 20 htmldocs
+  make -j all
+  make -j htmldocs
 }
 
 _package() {
@@ -85,7 +85,7 @@ _package() {
   echo "$pkgbase" | install -Dm644 /dev/stdin "$modulesdir/pkgbase"
 
   echo "Installing modules..."
-  make -j 20 INSTALL_MOD_PATH="$pkgdir/usr" INSTALL_MOD_STRIP=1 modules_install
+  make -j INSTALL_MOD_PATH="$pkgdir/usr" INSTALL_MOD_STRIP=1 modules_install
 
   # remove build and source links
   rm "$modulesdir"/{source,build}

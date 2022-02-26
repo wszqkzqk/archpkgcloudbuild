@@ -75,7 +75,7 @@ prepare() {
 
   # get kernel version
   msg2 "Preparing kernel"
-  yes "" | make -j 20 prepare
+  yes "" | make -j prepare
 
   # load configuration
   msg2 "Preparing config"
@@ -84,7 +84,7 @@ prepare() {
   #make nconfig # new CLI menu for configuration
   #make xconfig # X-based configuration
   #make oldconfig # using old config from previous kernel version
-  make -j 20 olddefconfig # old config from previous kernel, defaults for new options
+  make -j olddefconfig # old config from previous kernel, defaults for new options
   # ... or manually edit .config
 }
 
@@ -94,7 +94,7 @@ build() {
   #Force zenv2 architecture optimisation.
   export CFLAGS="-march=znver3 -mtune=znver3 -O2 -pipe -fstack-protector-strong"
   export CXXFLAGS="${CFLAGS}"
-  make -j 20 ${MAKEFLAGS} LOCALVERSION= bzImage modules
+  make -j ${MAKEFLAGS} LOCALVERSION= bzImage modules
 }
 
 _package() {
@@ -114,7 +114,7 @@ _package() {
   _basekernel=${_basekernel%.*}
 
   mkdir -p "${pkgdir}"/{lib/modules,lib/firmware,boot}
-  make -j 20 LOCALVERSION= INSTALL_MOD_PATH="${pkgdir}" modules_install
+  make -j LOCALVERSION= INSTALL_MOD_PATH="${pkgdir}" modules_install
   cp arch/$KARCH/boot/bzImage "${pkgdir}/boot/vmlinuz-${pkgbase}"
 
   # set correct depmod command for install
