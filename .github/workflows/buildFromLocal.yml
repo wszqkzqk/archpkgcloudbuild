@@ -14,7 +14,7 @@ jobs:
   buildLocal:
     strategy:
       matrix:
-        PKGBUILDs: []
+        PKGBUILDs: [linux-amd-clang]
 
       fail-fast: false
       
