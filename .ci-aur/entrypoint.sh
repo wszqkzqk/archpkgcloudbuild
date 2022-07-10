@@ -20,7 +20,7 @@ pacman -S --noconfirm --needed git
 git clone https://aur.archlinux.org/yay.git /tmp/yay
 pushd /tmp/yay
 chmod -R a+rw .
-sudo -H -u builder makepkg --skippgpcheck --syncdeps --install --noconfirm
+sudo -H -u builder makepkg --skippgpcheck --syncdeps --install --noconfirm -buildvcs=false
 popd
 
 
