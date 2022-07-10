@@ -22,7 +22,6 @@ pacman -Sy --noconfirm && pacman -S --noconfirm archlinuxcn-keyring
 pacman -S --noconfirm yay
 
 pacman -R archlinuxcn-keyring --noconfirm
-cat /etc/pacman.conf
 sed -i "/[archlinuxcn]/Q" /etc/pacman.conf
 cat /etc/pacman.conf
 pacman -Syu --noconfirm
