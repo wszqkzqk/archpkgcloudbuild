@@ -12,6 +12,8 @@ cat << EOM >> /etc/pacman.conf
 Include = /etc/pacman.d/mirrorlist
 EOM
 
+cp /etc/pacman.conf /etc/pacman.conf.bak
+
 cat << EOM >> /etc/pacman.conf
 [archlinuxcn]
 Server = https://repo.archlinuxcn.org/x86_64
@@ -22,8 +24,7 @@ pacman -Sy --noconfirm && pacman -S --noconfirm archlinuxcn-keyring
 pacman -S --noconfirm yay
 
 pacman -R archlinuxcn-keyring --noconfirm
-sed -i "/[archlinuxcn]/Q" /etc/pacman.conf
-cat /etc/pacman.conf
+cp /etc/pacman.conf.bak /etc/pacman.conf
 pacman -Syu --noconfirm
 
 # Install yay
