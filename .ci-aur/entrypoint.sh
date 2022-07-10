@@ -6,6 +6,12 @@ useradd builder -m
 echo "builder ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 chmod -R a+rw .
 
+# Enable the multilib repository
+cat << EOM >> /etc/pacman.conf
+[multilib]
+Include = /etc/pacman.d/mirrorlist
+EOM
+
 cat << EOM >> /etc/pacman.conf
 [archlinuxcn]
 Server = https://repo.archlinuxcn.org/x86_64
@@ -18,6 +24,7 @@ pacman -S --noconfirm yay
 pacman -R archlinuxcn-keyring --noconfirm
 cat /etc/pacman.conf
 sed -i "/[archlinuxcn]/Q" /etc/pacman.conf
+cat /etc/pacman.conf
 pacman -Syu --noconfirm
 
 # Install yay
