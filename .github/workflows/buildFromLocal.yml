@@ -32,12 +32,6 @@ jobs:
           # 在打包wps-office-cn等安装包内含有大量中文路径的软件时应当打开这个选项
           # namcapDisable: true
 
-          
-      - uses: actions/upload-artifact@v2
-        with:
-          path: ./*/*.pkg.tar*
-          name: ${{ matrix.PKGBUILDs }}
-
       - uses: ncipollo/release-action@v1
         with:
           allowUpdates: true

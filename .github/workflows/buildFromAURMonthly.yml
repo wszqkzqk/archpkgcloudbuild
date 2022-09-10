@@ -26,11 +26,6 @@ jobs:
       - uses: ./.ci-aur
         with:
           repo-name: ${{ matrix.repos }}
-      
-      - uses: actions/upload-artifact@v2
-        with:
-          path: ./*/*.pkg.tar.zst
-          name: ${{ matrix.repos }}
 
       - uses: ncipollo/release-action@v1
         with:
