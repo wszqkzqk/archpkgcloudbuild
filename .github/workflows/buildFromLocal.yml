@@ -5,7 +5,7 @@ concurrency:
   cancel-in-progress: true
 
 on:
-  push:
+  #push:
   pull_request:
 #  schedule:
 #    - cron:  '1 */8 * * *'

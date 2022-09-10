@@ -14,7 +14,7 @@ jobs:
   buildAUR:
     strategy:
       matrix:
-        repos: [howdy, python-dlib, pam-python, python-face_recognition, python-face_recognition_models, microsoft-edge-stable-bin, google-chrome]
+        repos: [microsoft-edge-stable-bin, oh-my-posh-bin]
 
       fail-fast: false
       

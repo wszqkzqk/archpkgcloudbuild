@@ -1,4 +1,4 @@
-## Marjaro/Arch环境下PKGBUILD文件的云构建工具
+## Arch/Marjaro环境下PKGBUILD文件的云构建工具
 
 1. 将含`PKGBUILD`文件和其他必需文件的构建文件夹放到仓库目录内
 2. 将需要构建的对应软件包添加到`./.github/workflows/对应文件`中的`repos`的中括号内（用","分隔）
